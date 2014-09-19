@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="WinApp.Views.MainPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="337" d:DesignWidth="476">
+  
+    <UserControl.Resources>
+        <DataTemplate x:Key="_pluginItemTemplate">
+            <TextBlock Text="{Binding PluginName}" />
+        </DataTemplate>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Content="Load all plugins" Command="{Binding LoadAllPluginsCommand}" />
+            <Button Grid.Row="1" Content="Initialize plugin" Command="{Binding InitializeSelectedPluginCommand}" />
+            <Button Grid.Row="2" Content="Close plugin" Command="{Binding CloseSelectedPluginCommand}" />
+            <Button Grid.Row="3" Content="Unload plugin" Command="{Binding UnloadSelectedPluginCommand}" />
+
+
+            <ListBox Grid.Row="4" ItemsSource="{Binding LoadedPlugins}" SelectedItem="{Binding SelectedPlugin}" ItemTemplate="{StaticResource _pluginItemTemplate}" />
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <ContentPresenter Grid.Row="0"  Content="{Binding SelectedPlugin}" />
+            <GroupBox Grid.Row="1" Header="Logs">
+                <ListBox ItemsSource="{Binding PluginParent.Logs}" />
+            </GroupBox>
+
+        </Grid>
+        
+    </Grid>
+</UserControl>
