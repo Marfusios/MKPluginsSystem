@@ -18,6 +18,11 @@ namespace Plugin1
 
         #endregion
 
+        public string TestField = "default value";
+
+        public void TestMethod()
+        {
+        }
 
         private void someMethod()
         {
